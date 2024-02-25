@@ -7,6 +7,11 @@ body {
 	margin-right: 10%;
 }
 
+input,
+textarea {
+	font-family: 'Jost', sans-serif; /* Use Jost font */
+}
+
 header .container {
 	display: flex;
 	flex-direction: column;
@@ -15,6 +20,7 @@ header .container {
 h1,
 .add-task {
 	margin: 0;
+	width: 100%;
 }
 
 header h1 {
@@ -35,9 +41,10 @@ header h1 {
 	margin-bottom: 1%;
 }
 
-th.date {
+thead {
 	font-family: 'Jost', sans-serif;
 	font-weight: 900;
+	font-size: 20px;
 }
 
 .date {
@@ -49,7 +56,7 @@ th.date {
 	display: flex;
 	align-items: center;
 	margin-right: 10px;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 }
 
 .group > input {
@@ -107,5 +114,5 @@ th.highlight {
 .checkbox-container {
 	overflow-x: auto;
 	white-space: nowrap;
-	margin-bottom: 12.8px;
+	margin-bottom: 13px;
 }
