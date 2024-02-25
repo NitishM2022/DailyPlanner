@@ -56,7 +56,8 @@ thead {
 	display: flex;
 	align-items: center;
 	margin-right: 10px;
-	margin-bottom: 15px;
+	margin-top: 1px;
+	margin-bottom: 12px;
 }
 
 .group > input {
@@ -114,5 +115,5 @@ th.highlight {
 .checkbox-container {
 	overflow-x: auto;
 	white-space: nowrap;
-	margin-bottom: 13px;
+	margin-bottom: 20px;
 }

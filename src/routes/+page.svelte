@@ -171,12 +171,11 @@
 						</div>
 						{#each days.slice().reverse() as day, j}
 							{#if compareToday(days[days.length - 1 - j].UTCDate)}
-								<div class="checkbox-container">
-									<input
-										type="checkbox"
-										bind:checked={dailyTaskLists[days.length - 1 - j].taskList[i]}
-									/>
-								</div>
+								<input
+									type="checkbox"
+									bind:checked={dailyTaskLists[days.length - 1 - j].taskList[i]}
+									class="checkbox-container"
+								/>
 							{/if}
 						{/each}
 					</div>
