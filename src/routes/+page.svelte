@@ -215,7 +215,7 @@
 								bind:value={tasks[i]}
 							/>
 							<button onclick={() => removeTask(i)} class="delete-button">
-								<span class="material-symbols-outlined"> delete </span>
+								<span class="material-symbols-outlined"> close </span>
 							</button>
 						</div>
 						{#each filteredDays.slice().reverse() as day, j}
