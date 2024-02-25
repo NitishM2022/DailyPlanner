@@ -6,6 +6,7 @@
 		date: number;
 		day: string;
 		month: string;
+		UTCDate: number;
 		highlight: string;
 	};
 
@@ -22,6 +23,7 @@
 	const currMonth = new Date().getMonth();
 	const currMonthString = monthToString(currMonth);
 	const daysInMonth = new Date(currYear, currMonth + 1, 0).getDate();
+	const charMax = 74;
 
 	$effect(() => {
 		const savedHighlights = localStorage.getItem('highlights');
@@ -30,10 +32,12 @@
 		} else {
 			for (let i = 0; i < daysInMonth; i++) {
 				const currDay = new Date(currYear, currMonth, i + 1);
+
 				days[i] = {
 					date: i + 1,
 					day: dayOfWeekToString(currDay.getDay()),
 					month: monthToString(currDay.getMonth()),
+					UTCDate: currDay.getTime(),
 					highlight: ''
 				};
 			}
@@ -59,7 +63,6 @@
 	});
 
 	$effect(() => {
-		//tasks update
 		localStorage.setItem('tasks', JSON.stringify(tasks));
 	});
 
@@ -102,34 +105,84 @@
 			(e.target as HTMLInputElement).blur();
 		}
 	}
+
+	function limitCharacters(e: Event) {
+		const inputEl = e.target as HTMLInputElement;
+		if (inputEl.value.length > charMax) {
+			inputEl.value = inputEl.value.slice(0, charMax);
+		}
+	}
+
+	function compareToday(date: number) {
+		console.log(date, new Date().getTime());
+		return date <= new Date().getTime();
+	}
 </script>
 
-<h1>{currMonthString}</h1>
-<input onkeydown={addTask} placeholder="Add daily tasks" type="text" />
+<header><h1>{currMonthString}</h1></header>
 
-<table>
-	<thead>
-		<tr>
-			<th>Day</th>
-			<th>Date</th>
-			<th>Highlight</th>
-			{#each tasks as task, i}
-				<th>{task} <button onclick={() => removeTask(i)}> Delete</button> </th>
-			{/each}
-		</tr>
-	</thead>
-	<tbody>
-		{#each days as day, i}
-			<tr>
-				<td>{day.day}</td>
-				<td>{day.date}</td>
-				<td><input onkeydown={blurFocus} bind:value={day.highlight} type="text" /></td>
-				{#each dailyTaskLists[i]?.taskList as task, j}
-					<td>
-						<input type="checkbox" bind:checked={dailyTaskLists[i].taskList[j]} />
-					</td>
-				{/each}
-			</tr>
-		{/each}
-	</tbody>
-</table>
+<main>
+	<input onkeydown={addTask} placeholder="Add daily tasks" type="text" />
+	<div class="container">
+		<div style="display: flex; flex-direction: row;">
+			<table class="striped">
+				<thead>
+					<tr>
+						<th scope="col">Date</th>
+						<th scope="col">Highlight</th>
+					</tr>
+				</thead>
+				<tbody>
+					{#if days}
+						{#each days.slice().reverse() as day, i}
+							{#if compareToday(days[days.length - 1 - i].UTCDate)}
+								<tr>
+									<th scope="row">{day.date}</th>
+									<td>
+										<textarea
+											onkeydown={blurFocus}
+											on:input={limitCharacters}
+											bind:value={day.highlight}
+											class="highlight"
+										>
+										</textarea>
+									</td>
+								</tr>
+							{/if}
+						{/each}
+					{/if}
+				</tbody>
+			</table>
+			<div class="scrollable">
+				<div class="task-list-row">
+					{#each tasks as task, i}
+						<div class="group">
+							<input onkeydown={blurFocus} bind:value={tasks[i]} />
+							<button onclick={() => removeTask(i)} class="delete-button">
+								<span class="material-symbols-outlined"> delete </span>
+							</button>
+						</div>
+					{/each}
+				</div>
+				{#if days}
+					<div class="tasks-list-row">
+						{#each tasks as task, i}
+							<div class="task-list-col">
+								{#each days.slice().reverse() as day, j}
+									{#if compareToday(days[days.length - 1 - j].UTCDate)}
+										<div class="checkbox-container">
+											<input
+												type="checkbox"
+												bind:checked={dailyTaskLists[days.length - 1 - j].taskList[i]}
+											/>
+										</div>
+									{/if}
+								{/each}
+							</div>
+						{/each}
+					</div>
+				{/if}
+			</div>
+		</div>
+	</div>
+</main>
