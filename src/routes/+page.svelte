@@ -15,9 +15,15 @@
 		taskList: boolean[];
 	};
 
+	type Filters = 'All' | 'Complete' | 'Partial' | 'None' | 'Highlight';
+
 	let days = $state<Day[]>([]);
 	let tasks = $state<String[]>([]);
 	let dailyTaskLists = $state<DailyTaskList[]>([]);
+
+	let currFilter: Filters = $state<Filters>('All');
+	let filteredDays = $derived(filterDays());
+	let filteredTaskLists = $derived(filterTaskList());
 
 	const currYear = new Date().getFullYear();
 	const currMonth = new Date().getMonth();
@@ -25,6 +31,7 @@
 	const daysInMonth = new Date(currYear, currMonth + 1, 0).getDate();
 	const charMax = 74;
 
+	// Load saved data
 	$effect(() => {
 		const savedHighlights = localStorage.getItem('highlights');
 		if (savedHighlights) {
@@ -58,6 +65,7 @@
 		}
 	});
 
+	// Save data
 	$effect(() => {
 		localStorage.setItem('highlights', JSON.stringify(days));
 	});
@@ -104,12 +112,6 @@
 		}
 	}
 
-	function blurFocus(e: KeyboardEvent) {
-		if (e.key === 'Enter') {
-			(e.target as HTMLInputElement).blur();
-		}
-	}
-
 	function limitCharacters(e: Event) {
 		const inputEl = e.target as HTMLInputElement;
 		if (inputEl.value.length > charMax) {
@@ -121,10 +123,51 @@
 		console.log(date, new Date().getTime());
 		return date <= new Date().getTime();
 	}
+
+	function setFilter(newFilter: Filters) {
+		currFilter = newFilter;
+	}
+
+	function filterDays() {
+		switch (currFilter) {
+			case 'All':
+				return days;
+			case 'Complete':
+				return days.filter((day, index) => dailyTaskLists[index].taskList.every((bool) => bool));
+			case 'Partial':
+				return days.filter((day, index) => dailyTaskLists[index].taskList.some((bool) => bool));
+			case 'None':
+				return days.filter((day, index) => dailyTaskLists[index].taskList.every((bool) => !bool));
+			case 'Highlight':
+				return days.filter((day) => day.highlight.length > 0);
+		}
+	}
+
+	function filterTaskList() {
+		switch (currFilter) {
+			case 'All':
+				return dailyTaskLists;
+			case 'Complete':
+				return dailyTaskLists.filter((item) => item.taskList.every((bool) => bool));
+			case 'Partial':
+				return dailyTaskLists.filter((item) => item.taskList.some((bool) => bool));
+			case 'None':
+				return dailyTaskLists.filter((item) => item.taskList.every((bool) => !bool));
+			case 'Highlight':
+				return dailyTaskLists.filter((item, index) => days[index].highlight.length > 0);
+		}
+	}
 </script>
 
 <header>
 	<h1 class="margin-bottom: 0;">{currMonthString}</h1>
+	<div style="display: flex; flex-direction: row; gap: 8px;">
+		<button on:click={() => setFilter('All')} class="filter"> All</button>
+		<button on:click={() => setFilter('Complete')} class="filter">Complete</button>
+		<button on:click={() => setFilter('Partial')} class="filter">Partial</button>
+		<button on:click={() => setFilter('None')} class="filter">None</button>
+		<button on:click={() => setFilter('Highlight')} class="filter">Highlight</button>
+	</div>
 	<input onkeydown={addTask} placeholder="Add daily tasks" type="text" class="add-task" />
 </header>
 
@@ -139,14 +182,14 @@
 			</thead>
 			<tbody>
 				<tr style="height: 5px;"></tr>
-				{#if days}
-					{#each days.slice().reverse() as day, i}
-						{#if compareToday(days[days.length - 1 - i].UTCDate)}
+				{#if filteredDays}
+					{#each filteredDays.slice().reverse() as day, i}
+						{#if compareToday(filteredDays[filteredDays.length - 1 - i].UTCDate)}
 							<tr>
 								<th scope="row" class="date">{day.date}</th>
 								<td>
 									<textarea
-										onkeydown={blurFocus}
+										onkeydown={(e: KeyboardEvent) => (e.key === 'Enter' ? (e.target as HTMLTextAreaElement).blur() : null)}
 										on:input={limitCharacters}
 										bind:value={day.highlight}
 										class="highlight"
@@ -164,16 +207,19 @@
 				{#each tasks as task, i}
 					<div class="task-list-col">
 						<div class="group">
-							<input onkeydown={blurFocus} bind:value={tasks[i]} />
+							<input
+								onkeydown={(e: KeyboardEvent) => (e.key === 'Enter' ? (e.target as HTMLTextAreaElement).blur() : null)}
+								bind:value={tasks[i]}
+							/>
 							<button onclick={() => removeTask(i)} class="delete-button">
 								<span class="material-symbols-outlined"> delete </span>
 							</button>
 						</div>
-						{#each days.slice().reverse() as day, j}
-							{#if compareToday(days[days.length - 1 - j].UTCDate)}
+						{#each filteredDays.slice().reverse() as day, j}
+							{#if compareToday(filteredDays[filteredDays.length - 1 - j].UTCDate)}
 								<input
 									type="checkbox"
-									bind:checked={dailyTaskLists[days.length - 1 - j].taskList[i]}
+									bind:checked={filteredTaskLists[filteredDays.length - 1 - j].taskList[i]}
 									class="checkbox-container"
 								/>
 							{/if}
