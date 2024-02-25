@@ -184,10 +184,7 @@
 			</thead>
 
 			<tbody>
-				<tr>
-					<td colspan="100%"><div class="hr-copy"></div></td>
-				</tr>
-				<tr style="height: 5px;"></tr>
+				<tr style="height: 5px;"><td colspan="100%"><div class="hr-copy"></div></td></tr>
 				{#if filteredDays}
 					{#each filteredDays.slice().reverse() as day, i}
 						{#if compareToday(filteredDays[filteredDays.length - 1 - i].UTCDate)}

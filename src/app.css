@@ -41,6 +41,7 @@ header h1 {
 .hr-copy {
 	border: 0.5px solid #ccc;
 	width: 100%;
+	margin-bottom: 5px;
 }
 
 .filter {
@@ -86,8 +87,8 @@ thead {
 	display: flex;
 	align-items: center;
 	margin-right: 12px;
-	margin-top: 5px;
-	margin-bottom: 12px;
+	margin-top: 1px;
+	margin-bottom: 16px;
 }
 
 .group > input {
