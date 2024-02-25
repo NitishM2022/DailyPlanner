@@ -161,14 +161,16 @@
 
 <header>
 	<h1 class="margin-bottom: 0;">{currMonthString}</h1>
-	<div style="display: flex; flex-direction: row; gap: 8px;">
+
+	<input onkeydown={addTask} placeholder="Add daily tasks" type="text" class="add-task" />
+	<div style="display: flex; flex-direction: row; gap: 8px; margin-bottom:10px">
 		<button on:click={() => setFilter('All')} class="filter"> All</button>
-		<button on:click={() => setFilter('Complete')} class="filter">Complete</button>
+		<button on:click={() => setFilter('Complete')} class="filter">Done</button>
 		<button on:click={() => setFilter('Partial')} class="filter">Partial</button>
 		<button on:click={() => setFilter('None')} class="filter">None</button>
-		<button on:click={() => setFilter('Highlight')} class="filter">Highlight</button>
+		<button on:click={() => setFilter('Highlight')} class="filter">Highlights</button>
 	</div>
-	<input onkeydown={addTask} placeholder="Add daily tasks" type="text" class="add-task" />
+	<div class="hr-div" />
 </header>
 
 <main>
@@ -180,7 +182,11 @@
 					<th scope="col" class="highlight">Highlight</th>
 				</tr>
 			</thead>
+
 			<tbody>
+				<tr>
+					<td colspan="100%"><div class="hr-copy"></div></td>
+				</tr>
 				<tr style="height: 5px;"></tr>
 				{#if filteredDays}
 					{#each filteredDays.slice().reverse() as day, i}

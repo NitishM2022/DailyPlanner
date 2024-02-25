@@ -3,10 +3,12 @@
 body {
 	font-family: 'Jost', sans-serif;
 	font-weight: 300;
+	color: #000000;
 	margin-left: 10%;
 	margin-right: 10%;
 }
 
+button,
 input,
 textarea {
 	font-family: 'Jost', sans-serif; /* Use Jost font */
@@ -30,19 +32,43 @@ header h1 {
 	font-size: 40px;
 }
 
+.hr-div {
+	border: 0.5px solid #ccc;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.hr-copy {
+	border: 0.5px solid #ccc;
+	width: 100%;
+}
+
 .filter {
-	width: 7%;
+	width: 8%;
+	padding: 2px 0px;
+
+	font-size: 16px;
+	text-align: center;
+	text-decoration: none;
+	background-color: rgb(229, 48, 48);
+	color: white;
+	border: none;
+	border-radius: 4px;
+	transition: background-color 0.3s ease;
+}
+
+.filter:hover {
+	background-color: rgb(145, 31, 31);
 }
 
 .add-task {
 	margin-top: 10px;
 	margin-bottom: 10px;
-	height: 20px;
+	box-sizing: border-box;
 	padding: 10px;
 	font-size: 16px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	margin-bottom: 1%;
 }
 
 thead {
@@ -80,10 +106,15 @@ thead {
 	width: 40px;
 
 	background-color: rgb(229, 48, 48);
-	border: solid rgb(229, 48, 48);
+	border: none;
 
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
+	transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+	background-color: rgb(145, 31, 31);
 }
 
 th.highlight {
@@ -97,8 +128,8 @@ th.highlight {
 	resize: none;
 
 	outline: 0;
-	border-width: 0 0 2px;
-	border-color: rgb(0, 0, 0);
+	border-width: 0 0 1px;
+	border-color: #ccc;
 }
 
 .scrollable {
@@ -119,5 +150,5 @@ th.highlight {
 .checkbox-container {
 	overflow-x: auto;
 	white-space: nowrap;
-	margin-bottom: 20px;
+	margin-bottom: 19px;
 }
