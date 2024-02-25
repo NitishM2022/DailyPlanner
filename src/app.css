@@ -1,42 +1,87 @@
-/* Import the Roboto font */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;1,300&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Set the global font to Roboto */
 body {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Jost', sans-serif;
+	font-weight: 300;
 	margin-left: 10%;
 	margin-right: 10%;
+}
+
+header .container {
+	display: flex;
+	flex-direction: column;
+}
+
+h1,
+.add-task {
+	margin: 0;
+}
+
+header h1 {
+	margin-top: 20px;
+	font-family: 'Jost', sans-serif;
+	font-weight: 900;
+	font-size: 40px;
+}
+
+.add-task {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 20px;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	margin-bottom: 1%;
+}
+
+th.date {
+	font-family: 'Jost', sans-serif;
+	font-weight: 900;
+}
+
+.date {
+	padding-right: 10px;
+	text-align: center;
 }
 
 .group {
 	display: flex;
 	align-items: center;
 	margin-right: 10px;
+	margin-bottom: 10px;
 }
 
 .group > input {
 	height: 24px;
 	width: 50px;
+	border: 1px solid #ccc;
 	border-right: 0;
-	border-top-left-radius: 8px;
-	border-bottom-left-radius: 8px;
+
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
 	text-align: center;
 }
 
 .delete-button {
-	height: 30px;
+	height: 28px;
 	width: 40px;
 
-	background-color: red;
-	border-color: red;
+	background-color: indianred;
+	border: solid indianred;
 
-	border-top-right-radius: 8px;
-	border-bottom-right-radius: 8px;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+th.highlight {
+	font-family: 'Jost', sans-serif;
+	font-weight: 900;
 }
 
 .highlight {
-	width: 600px;
 	height: 20px;
+	width: 100%;
 	resize: none;
 
 	outline: 0;
@@ -45,11 +90,7 @@ body {
 }
 
 .scrollable {
-	background-color: bisque;
-	width: 1000px;
 	overflow-x: auto;
-	display: flex;
-	flex-wrap: wrap;
 }
 
 .task-list-row {
@@ -57,21 +98,14 @@ body {
 	flex-direction: row;
 }
 
-.tasks-list-row {
-	flex: 0 100%;
-	display: flex;
-	flex-direction: row;
-	background-color: rebeccapurple;
-}
-
-.scrollable .tasks-list-row .task-list-col {
+.task-list-col {
 	display: flex;
 	flex-direction: column;
-	background-color: brown;
-	gap: 15px;
+	align-items: center;
 }
 
 .checkbox-container {
 	overflow-x: auto;
 	white-space: nowrap;
+	margin-bottom: 12.8px;
 }
