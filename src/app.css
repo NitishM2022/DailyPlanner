@@ -4,8 +4,9 @@ body {
 	font-family: 'Jost', sans-serif;
 	font-weight: 300;
 	color: #000000;
-	margin-left: 10%;
-	margin-right: 10%;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
 }
 
 button,
@@ -14,9 +15,19 @@ textarea {
 	font-family: 'Jost', sans-serif; /* Use Jost font */
 }
 
-header .container {
+.container {
+	margin: 0 10%;
+}
+
+header {
 	display: flex;
 	flex-direction: column;
+}
+
+footer {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 50px;
 }
 
 h1,
@@ -103,11 +114,20 @@ thead {
 	text-align: center;
 }
 
+.material-symbols-outlined {
+	font-variation-settings:
+		'FILL' 0,
+		'wght' 400,
+		'GRAD' 0,
+		'opsz' 24;
+	color: white;
+}
+
 .delete-button {
 	height: 28px;
 	width: 40px;
 
-	background-color: rgb(229, 48, 48);
+	background-color: #ccc(234, 234, 234);
 	border: none;
 
 	border-top-right-radius: 4px;
@@ -116,7 +136,7 @@ thead {
 }
 
 .delete-button:hover {
-	background-color: rgb(145, 31, 31);
+	background-color: #9a9a9a;
 }
 
 th.highlight {
