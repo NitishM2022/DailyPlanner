@@ -1,38 +1,46 @@
-# create-svelte
+# Learning Svelte 5
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+This project is my journey to learn about the new features in Svelte 5.
 
-## Creating a project
+## About the Project
 
-If you're seeing this, you've probably already done this step. Congrats!
+I created this project to explore and understand the new features introduced in Svelte 5. This includes understanding the new syntax, the new lifecycle methods, and how to effectively use them in a Svelte project.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Getting Started
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+To get a local copy up and running, follow these steps:
 
-## Developing
+1. Clone the repository:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+   ```bash
+   git clone https://github.com/yourusername/learning-svelte-5.git
+   ```
 
-```bash
-npm run dev
+2. Install the dependencies:
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+   ```bash
+   npm install
+   ```
 
-## Building
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-To create a production version of your app:
+## What I Learned
 
-```bash
-npm run build
-```
+I primarily wanted to build a project that leveraged the new runes and signals. Through my journey I learned the Observer Pattern, the power of Signals, Compile Time Reactivity vs Runtime Reactivity, and Local Storage. I have tried to iron out all the bugs, so please report any issues if you find any.
 
-You can preview the production build with `npm run preview`.
+## Contributing
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
