@@ -61,9 +61,7 @@
 	<div class="months">
 		{#each months as { value, name }}
 			{#if date.month === value}
-				<button class="month-button" style="background-color: #777777; color: #ffffff;"
-					>{name}</button
-				>
+				<button class="month-select">{name}</button>
 			{:else}
 				<button class="month-button" on:click={() => (date.month = value)}>{name}</button>
 			{/if}
@@ -74,28 +72,3 @@
 <hr style="background-color: #777777; border: none;" />
 
 <slot />
-
-<style>
-	.months {
-		display: flex;
-		justify-content: center;
-		padding: 0 10px;
-		padding-top: 8px;
-	}
-
-	.month-button {
-		border: none;
-		background-color: rgb(255, 255, 255);
-		cursor: pointer;
-		padding: 0 20px;
-		box-sizing: border-box;
-		color: #777777;
-	}
-
-	.year-selector {
-		border: none;
-		text-align: center;
-		outline: none;
-		color: #777777;
-	}
-</style>

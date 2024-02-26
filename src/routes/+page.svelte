@@ -15,17 +15,18 @@
 			inputEl.value = inputEl.value.slice(0, charMax);
 		}
 	}
-
-	$effect(() => {
-		console.log(date.days);
-	});
 </script>
 
 <div class="container">
 	<header>
 		<h1 class="margin-bottom: 0;">{monthToString(date.month)} {date.year}</h1>
 
-		<input onkeydown={date.addTask} placeholder="Add daily tasks" type="text" class="add-task" />
+		<input
+			onkeydown={date.addTask}
+			placeholder="Add tasks for {monthToString(date.month).toLowerCase()}"
+			type="text"
+			class="add-task"
+		/>
 		<div style="display: flex; flex-direction: row; gap: 8px; margin-bottom:10px">
 			<button on:click={() => date.setFilter('All')} class="filter"> All</button>
 			<button on:click={() => date.setFilter('Complete')} class="filter">Done</button>

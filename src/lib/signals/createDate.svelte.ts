@@ -179,15 +179,6 @@ export function createDate() {
 		get tasks() {
 			return tasks;
 		},
-		get days() {
-			return days;
-		},
-		get dailyTaskLists() {
-			return dailyTaskLists;
-		},
-		get daysInMonth() {
-			return daysInMonth;
-		},
 		addTask,
 		removeTask,
 		setFilter
