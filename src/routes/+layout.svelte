@@ -1,10 +1,12 @@
 <script lang="ts">
 	import '../app.css';
 	import { createDate } from '$lib/signals/createDate.svelte';
+	import { setContext } from 'svelte';
 
 	const date = createDate();
 
-	let month = $state(date.month);
+	setContext('date', date);
+
 	const months = [
 		{ value: 0, name: 'Jan' },
 		{ value: 1, name: 'Feb' },
@@ -26,7 +28,6 @@
 		if (e.key === 'Enter') {
 			const numValue = parseInt(inputEl.value, 10);
 			if (numValue >= 1970 && numValue <= 2100) {
-				date.month = month;
 				date.year = numValue;
 				inputEl.value = '';
 				inputEl.placeholder = 'Enter Year';
@@ -63,12 +64,8 @@
 				<button class="month-button" style="background-color: #777777; color: #ffffff;"
 					>{name}</button
 				>
-			{:else if month === value}
-				<button class="month-button" style="background-color: #abcdef; color: #123456;"
-					>{name}</button
-				>
 			{:else}
-				<button class="month-button" on:click={() => (month = value)}>{name}</button>
+				<button class="month-button" on:click={() => (date.month = value)}>{name}</button>
 			{/if}
 		{/each}
 		<input type="text" on:keydown={handleInput} placeholder="Enter Year" class="year-selector" />
