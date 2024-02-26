@@ -31,6 +31,7 @@
 				date.year = numValue;
 				inputEl.value = '';
 				inputEl.placeholder = 'Enter Year';
+				inputEl.blur();
 			}
 			return;
 		}
